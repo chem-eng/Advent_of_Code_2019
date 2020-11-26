@@ -135,7 +135,36 @@ class CalculatBiodivers():
     def __init__(self):
         pass
 
-    def calc(self,matrix):
+    def get_exponent(self, line, elem):
+        exponent = 0
+        if line == 0:
+            exponent = elem
+        if line == 1:
+            exponent = elem +5
+        if line == 2:
+            exponent = elem +10
+        if line == 3:
+            exponent = elem + 15
+        if line == 4:
+            exponent = elem + 20
+        return exponent
+    
+    def get_expo_list(self,matrix):
+        exponents = []        
+        for line in range(5):
+            for elem in range(5):
+                if matrix[line][elem] == "#":
+                    exponents.append(self.get_exponent(line, elem))
+        return exponents
+    
+    def calc_Bio(self, exp_list):
+        result = 0
+        for count in range(len(exp_list)):
+            result += pow(2,exp_list[count])
+        return result
+
+    
+    
         
 
 if __name__ == "__main__":
@@ -160,5 +189,8 @@ if __name__ == "__main__":
         print(count)
     print("##################")
     print(first_list)
-    print(master)
+    print("Ergebniss:")
+    bio = CalculatBiodivers()
+    result = bio.calc_Bio(bio.get_expo_list(master.master_list[first_list]))
+    print(result)
 
